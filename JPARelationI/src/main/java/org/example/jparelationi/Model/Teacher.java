@@ -5,14 +5,13 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Check;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-@Data
+import java.util.Set;
+
+@Getter
+@Setter
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
@@ -44,6 +43,8 @@ public class Teacher {
 
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @PrimaryKeyJoinColumn
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Address address;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+    private Set<Course> courses;
 }
