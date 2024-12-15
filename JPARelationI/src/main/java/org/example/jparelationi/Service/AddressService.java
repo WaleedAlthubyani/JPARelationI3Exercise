@@ -3,6 +3,7 @@ package org.example.jparelationi.Service;
 import lombok.RequiredArgsConstructor;
 import org.example.jparelationi.Api.ApiException;
 import org.example.jparelationi.DTO.AddressDTO;
+import org.example.jparelationi.DTO.AddressODTO;
 import org.example.jparelationi.Model.Address;
 import org.example.jparelationi.Model.Teacher;
 import org.example.jparelationi.Repository.AddressRepository;
@@ -56,5 +57,12 @@ public class AddressService {
             throw new ApiException("Teacher not found");
 
         return teacher;
+    }
+
+    public AddressODTO convertAddressToDTO(Address address){
+        if (address==null)
+            return null;
+
+        return new AddressODTO(address.getArea(),address.getStreet(), address.getBuildingNumber());
     }
 }

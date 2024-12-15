@@ -2,12 +2,16 @@ package org.example.jparelationi.Service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.jparelationi.Api.ApiException;
+import org.example.jparelationi.DTO.CourseDTO;
 import org.example.jparelationi.Model.Course;
+import org.example.jparelationi.Model.Student;
 import org.example.jparelationi.Model.Teacher;
 import org.example.jparelationi.Repository.CourseRepository;
 import org.example.jparelationi.Repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -17,8 +21,8 @@ public class CourseService {
     private final CourseRepository courseRepository;
     private final TeacherRepository teacherRepository;
 
-    public List<Course> getAllCourses(){
-        return courseRepository.findAll();
+    public List<CourseDTO> getAllCourses(){
+        return convertCoursesToDTO(courseRepository.findAll());
     }
 
     public void addCourse(Course course){
@@ -72,4 +76,15 @@ public class CourseService {
 
         return teacher;
     }
+
+    public List<CourseDTO> convertCoursesToDTO(Collection<Course> courses){
+        List<CourseDTO> courseDTOS=new ArrayList<>();
+
+        for (Course c:courses){
+            courseDTOS.add(new CourseDTO(c.getName()));
+        }
+
+        return courseDTOS;
+    }
+
 }

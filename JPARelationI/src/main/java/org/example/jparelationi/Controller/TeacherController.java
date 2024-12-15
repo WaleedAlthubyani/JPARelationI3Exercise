@@ -3,6 +3,7 @@ package org.example.jparelationi.Controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.jparelationi.Api.ApiResponse;
+import org.example.jparelationi.DTO.TeacherDTO;
 import org.example.jparelationi.Model.Teacher;
 import org.example.jparelationi.Service.TeacherService;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class TeacherController {
     private final TeacherService teacherService;
 
     @GetMapping("/get")
-    public ResponseEntity<ApiResponse<List<Teacher>>> getAllTeachers(){
+    public ResponseEntity<ApiResponse<List<TeacherDTO>>> getAllTeachers(){
         return ResponseEntity.status(200).body(new ApiResponse<>(teacherService.getAllTeachers()));
     }
 
@@ -41,7 +42,7 @@ public class TeacherController {
     }
 
     @GetMapping("/get-teacher-by-id/{id}")
-    public ResponseEntity<ApiResponse<Teacher>> getTeacherById(@PathVariable Integer id){
+    public ResponseEntity<ApiResponse<TeacherDTO>> getTeacherById(@PathVariable Integer id){
         return ResponseEntity.status(201).body(new ApiResponse<>(teacherService.getTeacherById(id)));
     }
 

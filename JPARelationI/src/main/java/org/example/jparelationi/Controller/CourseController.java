@@ -3,6 +3,7 @@ package org.example.jparelationi.Controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.jparelationi.Api.ApiResponse;
+import org.example.jparelationi.DTO.CourseDTO;
 import org.example.jparelationi.Model.Course;
 import org.example.jparelationi.Service.CourseService;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class CourseController {
     private final CourseService courseService;
 
     @GetMapping("/get")
-    public ResponseEntity<ApiResponse<List<Course>>> getAllCourses(){
+    public ResponseEntity<ApiResponse<List<CourseDTO>>> getAllCourses(){
         return ResponseEntity.status(200).body(new ApiResponse<>(courseService.getAllCourses()));
     }
 
